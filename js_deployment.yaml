@@ -1,0 +1,41 @@
+
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: uklon-kuber
+  labels:
+    app  : uklon-kuber-application
+    env  : prod
+    owner: Yaroslav
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: uklon
+  template:
+    metadata:
+      labels:
+        project: uklon
+    spec:
+      containers:
+        - name : uklon-kuber
+          image: prostoyarko/uklon-js
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-pod-service
+  labels:
+    env  : prod
+    owner: Yaroslav
+spec:
+  selector:
+    project: uklon
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 80  
+      targetPort: 3000 
+  type: LoadBalancer

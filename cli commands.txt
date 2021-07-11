@@ -1,0 +1,6 @@
+git clone https://github.com/prostoyarko/uklon_task5.git
+cd uklon_task5
+minikube start
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f js_deployment.yaml
+kubectl apply -f ingress.yaml
